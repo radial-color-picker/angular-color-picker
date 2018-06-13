@@ -105,7 +105,7 @@ Emitted by the lifecycle Output
 
 <details>
     <summary>Color picker uses <code>hex</code>. How can I use other formats like <code>rgb()</code> or hsl?</summary>
-    <p>The color picker will recognize the format of the input, but will still work internally with hex value of the provided color. You can change the output format by setting the colorType property to `hex`, `rgb` or `hsl`</p>
+    <p>The color picker will recognize the format of the input, but will still work internally with hex value of the provided color. You can change the output format by setting the colorType property to <code>hex</code>, <code>rgb</code> or <code>hsl</code></p>
 </details>
 
 <details>

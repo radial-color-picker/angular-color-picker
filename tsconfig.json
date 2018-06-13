@@ -17,8 +17,11 @@
       "dom"
     ],
     "paths": {
-      "angular-color-picker": [
-        "dist/angular-color-picker"
+      "radial-color-picker": [
+        "dist/radial-color-picker"
+      ],
+      "radial-color-picker/*": [
+        "dist/radial-color-picker/*"
       ]
     }
   }

@@ -1,9 +1,6 @@
-# AngularColorPicker
+# Angular Color Picker
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
-
-
-## Angular Radial Color Picker
 
 <p align="center"><img width="250" src="./screenshots/thumbnail.png" alt="screenshot"></p>
 
@@ -18,9 +15,10 @@ This is a flexible and elegant material-ish design color picker. Developed with 
 ## Quick Links
 
 * [Usage](#usage)
-* [Options](#options)
+* [Inputs](#inputs)
+* [Outputs](#outputs)
 * [Instance methods](#instance-methods)
-* [Lifecycle events](#events)
+* [Lifecycle events](#lifecycle)
 
 * [FAQ](#questions)
 * [Contribute](#contributing)
@@ -53,8 +51,8 @@ import { RadialColorPickerModule } from 'radial-color-picker';
 export class AppModule { }
 ```
 
-## <a name="options">Options</a>
-`<rcp-radial-color-picker>` component has several attributes, all of which are optional.
+## <a name="inputs">Inputs</a>
+`<rcp-radial-color-picker>` component has several inputs, all of which are optional.
 
 | Options       | Type   | Default/Description |
 |------------|--------|---------|
@@ -64,15 +62,24 @@ export class AppModule { }
 | `enterAnimation`    | Boolean | flag to turn on/off intro animations. Defaults to true: <br> `true`. |
 | `exitAnimation`    | Boolean | lag to turn on/off outro animations. Defaults to true: <br> `true`. |
 | `size`    | String | pixel size of diameter. Defaults to 300: <br> `300`. |
-| `colorType`    | String | format of color to be emitted by the compnent. Defaults to hex: <br> `hex`. |
+| `colorType`    | String | format of color to be emitted by the component. Defaults to hex: <br> `hex`. |
 | `color`    | String | hex code of your color. Defaults to red: <br> `#FF0000`. |
+
+[Back To Top](#user-content-quick-links)
+
+
+## <a name="outputs">Outputs</a>
+`<rcp-radial-color-picker>` component has several outputs, all of which are optional.
+
+| Options       | Type   | Default/Description |
+|------------|--------|---------|
 | `select` | Function | Callback which is triggered when a color is selected. |
 | `colorChange` | Function | Callback which is triggered when color is changed (i.e. on rotation). |
 | `lifecycle` | Function | Callback which is triggered when component state is changed. |
 
 [Back To Top](#user-content-quick-links)
 
-## <a name="events">Lifecycle Events</a>
+## <a name="lifecycle">Lifecycle Events</a>
 
 Emitted by the lifecycle Output
 

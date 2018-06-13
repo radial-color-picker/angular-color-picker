@@ -209,7 +209,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
     this.rect = this.el.nativeElement.getBoundingClientRect();
     // console.log(this.rect);
     renderColorMap(this.canvas.nativeElement, this.getSize);
-    console.log(this.collapsed);
+    // console.log(this.collapsed);
     if (this.isCollapsed) {
       this.introAnimation();
     }

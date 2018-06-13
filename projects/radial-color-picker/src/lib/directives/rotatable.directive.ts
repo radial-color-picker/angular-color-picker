@@ -74,14 +74,14 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.angle && changes.angle.currentValue) {
-      console.log(changes.angle.currentValue);
+      // console.log(changes.angle.currentValue);
       const angle = changes.angle.currentValue + 90;
       this.renderer.setStyle(this.el.nativeElement, 'transform', `rotate(${angle}deg)`);
     }
   }
 
   ngAfterViewInit() {
-    console.log(this.isDisabled);
+    // console.log(this.isDisabled);
     this.rect = this.el.nativeElement.getBoundingClientRect();
     this.mouseUp$ = fromEvent(this.el.nativeElement, this.mouseUpEv, { passive: true });
     this.mouseOut$ = fromEvent(this.el.nativeElement, this.cancelEv, { passive: true });

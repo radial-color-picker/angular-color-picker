@@ -8,9 +8,14 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Great UX starts with two basic principles - ease of use and simplicity. Selecting a color should be as easy as moving a slider, clicking a checkbox or pressing a key just like other basic form elements behave.
 
-This is a flexible and elegant material-ish design color picker. Developed with mobile devices and keyboard usage in mind. Key features:
+This is a flexible and elegant material-ish design color picker. Developed with mobile devices in mind. Key features:
 * Supports touch devices
 * Angular animations
+
+This component doesn't have feature parity with
+it's (predecessor)[https://github.com/talamaska/angular-radial-color-picker] for Angular 1.x
+
+The component is developed so it can be used with template-driven or reactive form, or as a simple component.
 
 ## Quick Links
 
@@ -32,7 +37,7 @@ Color Picker on [npm](https://www.npmjs.com/package/@radial-color-picker/angular
 npm install -S @radial-color-picker/angular-color-picker
 ```
 
-And in your app module or any module that will hold the component that are using the radial color picker:
+In your app module or any module that will hold the components that are using the radial color picker:
 
 ```typescript
 import { RadialColorPickerModule } from 'radial-color-picker';
@@ -51,6 +56,13 @@ import { RadialColorPickerModule } from 'radial-color-picker';
 export class AppModule { }
 ```
 
+and in your component template
+```html
+<rcp-radial-color-picker></rcp-radial-color-picker>
+```
+
+more examples can be found in the app in this repository
+
 ## <a name="inputs">Inputs</a>
 `<rcp-radial-color-picker>` component has several inputs, all of which are optional.
 
@@ -60,7 +72,7 @@ export class AppModule { }
 | `collapsed`    | Boolean | should the initial render be collapsed/open state of the color picker. Defaults to true: <br> `true`. |
 | `collapsible`    | Boolean | Should color select trigger hiding of the color palette. Defaults to true: <br> `true`. |
 | `enterAnimation`    | Boolean | flag to turn on/off intro animations. Defaults to true: <br> `true`. |
-| `exitAnimation`    | Boolean | lag to turn on/off outro animations. Defaults to true: <br> `true`. |
+| `exitAnimation`    | Boolean | flag to turn on/off outro animations. Defaults to true: <br> `true`. |
 | `size`    | String | pixel size of diameter. Defaults to 300: <br> `300`. |
 | `colorType`    | String | format of color to be emitted by the component. Defaults to hex: <br> `hex`. |
 | `color`    | String | hex code of your color. Defaults to red: <br> `#FF0000`. |
@@ -79,6 +91,7 @@ export class AppModule { }
 
 [Back To Top](#user-content-quick-links)
 
+
 ## <a name="lifecycle">Lifecycle Events</a>
 
 Emitted by the lifecycle Output
@@ -90,6 +103,9 @@ Emitted by the lifecycle Output
 | `selected` | Fires when a color is selected via the middle selector. Event is fired right before `hide`. |
 | `hide` | Fires when the color picker is about to hide and **before** any animation is started. |
 | `hidden` | Fires when the color picker is hidden and has finished animating. |
+
+[Back To Top](#user-content-quick-links)
+
 
 ## <a name="instance-methods">Instance methods</a>
 | Name       | Description |

@@ -105,10 +105,10 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
       if (value instanceof Object) {
         _val = value.value;
       }
+      this._value = _val;
       if (_val.includes('#')) {
         this._value = _val.substring(1);
       }
-      this._value = _val;
 
       const rgb = hexToRgb(this._value);
       const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
@@ -275,7 +275,10 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   public onRotate(rotation) {
     const hex = hslToHex(this.angleToHue(rotation), 100, 50);
     this.value = hex;
-    this.colorChange.emit(`#${hex}`);
+    // console.log('on rotate', this.isExplicit);
+    if (!this.isExplicit) {
+      this.colorChange.emit(`#${hex}`);
+    }
   }
 
   public angleToHue(rotation) {

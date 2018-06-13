@@ -105,6 +105,7 @@ Emitted by the lifecycle Output
 
 <details>
     <summary>Color picker uses <code>hex</code>. How can I use other formats like <code>rgb()</code> or hsl?</summary>
+    <p>The color picker will recognize the format of the input, but will still work internally with hex value of the provided color. You can change the output format by setting the colorType property to `hex`, `rgb` or `hsl`</p>
 </details>
 
 <details>
@@ -114,7 +115,8 @@ Emitted by the lifecycle Output
 
 <details>
     <summary>How can I change the active color of the picker after initialization?</summary>
-    <p><code>rcp-radial-color-picker</code> component uses <code>OnChanges</code> to detect changes of the color binding. When using <code>&lt;rcp-radial-color-picker [color]="color"&gt;&lt;/rcp-radial-color-picker&gt;</code>
+    <p><code>rcp-radial-color-picker</code> component uses <code>OnChanges lifecycle hook</code> to detect changes of the color binding. When using
+    <code>&lt;rcp-radial-color-picker [color]="color"&gt;&lt;/rcp-radial-color-picker&gt;</code>
 </details>
 <br>
 

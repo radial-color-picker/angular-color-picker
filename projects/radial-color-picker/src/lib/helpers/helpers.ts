@@ -1,5 +1,10 @@
 import { Quadrant, Cache } from './constants';
 
+/**
+ * Calculates in which quadrant is the point, serves for calculating the right angle.
+ *
+ * @param point x,y coordinates of client's pointer position
+ */
 export const calculateQuadrant = (point: {x: number, y: number}): string => {
   if (point.x > 0) {
       if (point.y > 0) {
@@ -33,7 +38,12 @@ export const distanceOfSegmentByXYValues = (x1: number, y1: number, x2: number, 
     return Math.sqrt(((x1 - x2) * (x1 - x2)) + ((y1 - y2) * (y1 - y2)));
 };
 
-
+/**
+ * Calculates the angle of rotation
+ *
+ * @param point x,y coordinates of client's pointer position
+ * @param quadrant one of four quarters of the coordinate plane
+ */
 export const determineCSSRotationAngle = (point, quadrant) => {
   let cx = point.x;
   let cy = point.y;

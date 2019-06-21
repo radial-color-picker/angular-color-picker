@@ -13,7 +13,7 @@ This is a flexible and elegant material-ish design color picker. Developed with 
 * Angular animations
 
 This component doesn't have feature parity with
-it's (predecessor)[https://github.com/talamaska/angular-radial-color-picker] for Angular 1.x
+it's [predecessor](https://github.com/talamaska/angular-radial-color-picker) for Angular 1.x
 
 The component is developed so it can be used with template-driven or reactive form, or as a simple component.
 

@@ -33,7 +33,6 @@ The component is developed so it can be used with template-driven or reactive fo
 
 ## <a name="usage">Usage</a>
 
-#### With Module Build System
 Color Picker on [npm](https://www.npmjs.com/package/@radial-color-picker/angular-color-picker)
 ```bash
 npm install -S @radial-color-picker/angular-color-picker

@@ -121,6 +121,10 @@
               "devServerTarget": "angular-color-picker:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     },

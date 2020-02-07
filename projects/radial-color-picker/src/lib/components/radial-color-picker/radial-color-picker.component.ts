@@ -19,7 +19,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AnimationsMeta } from '../../helpers/animations';
-import { hexToRgb, hslToHex, rgbToHsl } from '../../helpers/color-functions';
+import { hexToRgb, hslToHex, rgbToHsl, extractRGB, rgbToHex, extractHSL } from '../../helpers/color-functions';
 import { renderColorMap } from '../../helpers/color-gradient';
 
 export const RADIAL_COLOR_PICKER_VALUE_ACCESSOR: any = {
@@ -53,12 +53,12 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   public disabled = false;
   public active = false;
 
-  public rect: any;
+  public rect: ClientRect;
 
   public knobState = false;
   public gradientState = false;
 
-  private _value = '6e00ff';
+  private _value = 'FF0000';
   private defaultSize = 300;
   private gradientPlayer: AnimationPlayer;
   private knobPlayer: AnimationPlayer;
@@ -100,19 +100,28 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   set value(value: any) {
-    let _val = value;
+    let val = value;
     if (value) {
       if (value instanceof Object) {
-        _val = value.value;
+        val = value.value;
       }
-      this._value = _val;
-      if (_val.includes('#')) {
-        this._value = _val.substring(1);
+      this._value = val;
+      if (val.includes('#')) {
+        this._value = val.substring(1);
+        const rgb = hexToRgb(this._value);
+        const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+        this.hueValue = hsl.hue;
+      } else if (val.includes('rgb')) {
+        const color = extractRGB(val);
+        const hsl = rgbToHsl(color.r, color.g, color.b);
+        this._value = rgbToHex(color.r, color.g, color.b);
+        this.hueValue = hsl.hue;
+      } else if (val.includes('hsl')) {
+        const color = extractHSL(val);
+        this._value = hslToHex(color.h, 100, 50);
+        this.hueValue = color.h;
       }
 
-      const rgb = hexToRgb(this._value);
-      const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-      this.hueValue = hsl.hue;
       // console.log('set value hue', this.hueValue);
     }
 
@@ -192,7 +201,9 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnInit() {
-    //
+    const rgb = hexToRgb(this._value);
+    const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+    this.hueValue = hsl.hue;
   }
 
   ngOnChanges(changes: SimpleChanges) {

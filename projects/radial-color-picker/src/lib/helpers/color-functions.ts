@@ -6,6 +6,22 @@ export const hexToRgb = (hex) => {
 
   return { r, g, b };
 };
+export const extractRGB = (rgb) => {
+  const result = /^(?:rgb\((\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\))$/i.exec(rgb);
+  const r = parseInt(result[1], 10);
+  const g = parseInt(result[2], 10);
+  const b = parseInt(result[3], 10);
+
+  return { r, g, b };
+};
+export const extractHSL = (hsl) => {
+  const result = /^(?:hsl\((\d{1,3})\s*,\s*(\d{1,3})%\s*,\s*(\d{1,3})%\))$/i.exec(hsl);
+  const h = parseInt(result[1], 10);
+  const s = parseInt(result[2], 10);
+  const l = parseInt(result[3], 10);
+
+  return { h, s, l };
+};
 
 
 

@@ -77,7 +77,7 @@ more examples can be found in the app in this repository
 | `exitAnimation`    | Boolean | flag to turn on/off outro animations. Defaults to true: <br> `true`. |
 | `size`    | String | pixel size of diameter. Defaults to 300: <br> `300`. |
 | `colorType`    | String | format of color to be emitted by the component. Defaults to hex: <br> `hex`. |
-| `color`    | String | hex code of your color. Defaults to red: <br> `#FF0000`. |
+| `color`    | String | hex, rgb or hsl code of your color. Defaults to red: <br> `#FF0000`. |
 
 [Back To Top](#user-content-quick-links)
 
@@ -87,7 +87,7 @@ more examples can be found in the app in this repository
 
 | Options       | Type   | Default/Description |
 |------------|--------|---------|
-| `select` | Function | Callback which is triggered when a color is selected. |
+| `selected` | Function | Callback which is triggered when a color is selected. |
 | `colorChange` | Function | Callback which is triggered when color is changed (i.e. on rotation). |
 | `lifecycle` | Function | Callback which is triggered when component state is changed. |
 

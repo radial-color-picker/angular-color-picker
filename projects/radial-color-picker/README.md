@@ -17,6 +17,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
       <img src="https://img.shields.io/npm/l/@radial-color-picker/angular-color-picker.svg" alt="License">
   </a>
 </p>
+
 ## Introduction
 
 Great UX starts with two basic principles - ease of use and simplicity. Selecting a color should be as easy as moving a slider, clicking a checkbox or pressing a key just like other basic form elements behave.

@@ -17,7 +17,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "radial-color-picker": [
+        "dist/radial-color-picker/radial-color-picker",
+        "dist/radial-color-picker"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

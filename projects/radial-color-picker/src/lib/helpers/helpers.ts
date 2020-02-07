@@ -5,19 +5,19 @@ import { Quadrant, Cache } from './constants';
  *
  * @param point x,y coordinates of client's pointer position
  */
-export const calculateQuadrant = (point: {x: number, y: number}): string => {
+export const calculateQuadrant = (point: { x: number, y: number }): string => {
   if (point.x > 0) {
-      if (point.y > 0) {
-          return Quadrant.I;
-      } else {
-          return Quadrant.IV;
-      }
+    if (point.y > 0) {
+      return Quadrant.I;
+    } else {
+      return Quadrant.IV;
+    }
   } else {
-      if (point.y > 0) {
-          return Quadrant.II;
-      } else {
-          return Quadrant.III;
-      }
+    if (point.y > 0) {
+      return Quadrant.II;
+    } else {
+      return Quadrant.III;
+    }
   }
 };
 
@@ -35,7 +35,7 @@ export const calculateQuadrant = (point: {x: number, y: number}): string => {
     * @return The distance between the two points.
     */
 export const distanceOfSegmentByXYValues = (x1: number, y1: number, x2: number, y2: number): number => {
-    return Math.sqrt(((x1 - x2) * (x1 - x2)) + ((y1 - y2) * (y1 - y2)));
+  return Math.sqrt(((x1 - x2) * (x1 - x2)) + ((y1 - y2) * (y1 - y2)));
 };
 
 /**
@@ -49,20 +49,20 @@ export const determineCSSRotationAngle = (point, quadrant) => {
   let cy = point.y;
   let add = 0;
   switch (quadrant) {
-      case Quadrant.II:
-          add = 270;
-          cx = ((point.x * Cache.cos90) - (point.y * Cache.sin90));
-          cy = ((point.x * Cache.sin90) + (point.y * Cache.cos90));
+    case Quadrant.II:
+      add = 270;
+      cx = ((point.x * Cache.cos90) - (point.y * Cache.sin90));
+      cy = ((point.x * Cache.sin90) + (point.y * Cache.cos90));
       break;
-      case Quadrant.III:
-          add = 180;
-          cx = ((point.x * Cache.cos180) - (point.y * Cache.sin180));
-          cy = ((point.x * Cache.sin180) + (point.y * Cache.cos180));
+    case Quadrant.III:
+      add = 180;
+      cx = ((point.x * Cache.cos180) - (point.y * Cache.sin180));
+      cy = ((point.x * Cache.sin180) + (point.y * Cache.cos180));
       break;
-      case Quadrant.IV:
-          add = 90;
-          cx = ((point.x * Cache.cos270) - (point.y * Cache.sin270));
-          cy = ((point.x * Cache.sin270) + (point.y * Cache.cos270));
+    case Quadrant.IV:
+      add = 90;
+      cx = ((point.x * Cache.cos270) - (point.y * Cache.sin270));
+      cy = ((point.x * Cache.sin270) + (point.y * Cache.cos270));
       break;
   }
 

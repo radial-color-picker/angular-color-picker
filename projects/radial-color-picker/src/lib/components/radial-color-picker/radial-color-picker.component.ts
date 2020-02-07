@@ -72,7 +72,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   @Input() public collapsed = true;
   @Input() public collapsible = true;
 
-  @Output() public select = new EventEmitter();
+  @Output() public selected = new EventEmitter();
   @Output() public colorChange = new EventEmitter();
   @Output() public lifecycle = new EventEmitter();
 
@@ -128,9 +128,9 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
     return color;
   }
 
-  @ViewChild('canvas', { read: ElementRef }) public canvas: ElementRef;
-  @ViewChild('knob', { read: ElementRef }) public knob: ElementRef;
-  @ViewChild('rotator', { read: ElementRef }) public rotator: ElementRef;
+  @ViewChild('canvas', { static: false, read: ElementRef }) public canvas: ElementRef;
+  @ViewChild('knob', { static: false, read: ElementRef }) public knob: ElementRef;
+  @ViewChild('rotator', { static: false, read: ElementRef }) public rotator: ElementRef;
 
   @HostBinding('style.width.px') get width() {
     return this.size ? this.size : this.defaultSize;
@@ -151,13 +151,13 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
       switch (this.colorType) {
         case 'hex':
           color = '#' + this._value;
-        break;
+          break;
         case 'rgb':
           color = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-        break;
+          break;
         case 'hsl':
           color = `hsl(${hsl.hue}, ${hsl.saturation}%, ${hsl.luminosity}%)`;
-        break;
+          break;
         default:
           color = '#' + this._value;
       }
@@ -192,7 +192,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnInit() {
-    this.recalculateKnobPosition();
+    //
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -206,6 +206,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngAfterViewInit() {
+    this.recalculateKnobPosition();
     this.rect = this.el.nativeElement.getBoundingClientRect();
     // console.log(this.rect);
     renderColorMap(this.canvas.nativeElement, this.getSize);
@@ -289,15 +290,17 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
     const radius = (this.getSize / 2);
     const innerCircle = radius * this.coefficient;
     const areaSize = radius - innerCircle;
-    const knobRect = this.knob.nativeElement.getBoundingClientRect();
-    const knobPosition = radius - (areaSize / 2 + innerCircle) - knobRect.width / 2;
-    this.renderer.setStyle(this.knob.nativeElement, 'top', knobPosition + 'px');
+    if (this.knob) {
+      const knobRect = this.knob.nativeElement.getBoundingClientRect();
+      const knobPosition = radius - (areaSize / 2 + innerCircle) - knobRect.width / 2;
+      this.renderer.setStyle(this.knob.nativeElement, 'top', knobPosition + 'px');
+    }
   }
 
   public confirmColor($event) {
     console.log('confirm color', $event);
     if (!this.isCollapsible) {
-      this.select.emit($event.color);
+      this.selected.emit($event.color);
       this.lifecycle.emit(RCPLifecycleEvents.selected);
       this.notifyValueChange();
       return;
@@ -305,7 +308,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
 
     // is color picker collapsed
     if (this.knobState) {
-      this.select.emit($event.color);
+      this.selected.emit($event.color);
       this.lifecycle.emit(RCPLifecycleEvents.selected);
       this.notifyValueChange();
       this.outroAnimation();
@@ -349,7 +352,13 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnDestroy() {
-
+    if (this.knobPlayer) {
+      this.knobPlayer.destroy();
+    }
+    if (this.gradientPlayer) {
+      this.gradientPlayer.destroy();
+    }
+    console.log('color picker destroy');
   }
 }
 

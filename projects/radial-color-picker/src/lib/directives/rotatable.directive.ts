@@ -13,8 +13,8 @@ import {
   Renderer2,
   SimpleChanges
 } from '@angular/core';
-import { fromEvent, Observable, Subscription } from 'rxjs';
-import { filter, merge, takeUntil, tap } from 'rxjs/operators';
+import { fromEvent, Observable, Subscription, merge } from 'rxjs';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 import { calculateQuadrant, determineCSSRotationAngle } from '../helpers/helpers';
 
 @Directive({
@@ -69,7 +69,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
   }
 
   ngOnInit() {
-    requestAnimationFrame(this.initialRender.bind(this));
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -82,40 +82,45 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
 
   ngAfterViewInit() {
     // console.log(this.isDisabled);
+    requestAnimationFrame(this.initialRender.bind(this));
     this.rect = this.el.nativeElement.getBoundingClientRect();
     this.mouseUp$ = fromEvent(this.el.nativeElement, this.mouseUpEv, { passive: true });
     this.mouseOut$ = fromEvent(this.el.nativeElement, this.cancelEv, { passive: true });
 
     this.mouseDownSub = fromEvent(this.el.nativeElement, this.mouseDownEv, { passive: true })
-    .pipe(
-      filter((val) => {
-        return this.active && !this.isDisabled;
-      })
-    )
-    .subscribe((downEvent) => {
-      // console.log('mouse down', downEvent,  this.rect);
-      this.dragging = true;
-      this.point = this.createPoint(downEvent);
-      this.rotateStart.emit(this.point);
-      this.applyRotation();
-      this.mouseMoveSub = fromEvent(this.el.nativeElement, this.mouseMoveEv).pipe(
-        takeUntil(this.mouseUp$.pipe(
-          merge(this.mouseOut$),
-          tap((upEvent) => {
-            // console.log('mouse up', upEvent, this.rect);
-            this.dragging = false;
-            this.mouseMoveSub.unsubscribe();
-            this.rotateStop.emit(this.point);
-          })
-        ))
-      ).subscribe((moveEvent: MouseEvent) => {
-        // console.log('mouse move', moveEvent, this.rect);
-
-        this.point = this.createPoint(moveEvent);
-        // console.log(this.point);
+      .pipe(
+        filter((val) => {
+          return this.active && !this.isDisabled;
+        })
+      )
+      .subscribe((downEvent) => {
+        this.dragging = true;
+        this.rect = this.el.nativeElement.getBoundingClientRect();
+        console.log('mouse down', downEvent, this.rect);
+        this.point = this.createPoint(downEvent);
+        this.rotateStart.emit(this.point);
         this.applyRotation();
+
+
+        this.mouseMoveSub = fromEvent(this.el.nativeElement, this.mouseMoveEv).pipe(
+          takeUntil(merge(this.mouseOut$, this.mouseUp$).pipe(
+            tap((upEvent) => {
+              this.rect = this.el.nativeElement.getBoundingClientRect();
+              console.log('mouse up', upEvent, this.rect);
+              this.dragging = false;
+              this.mouseMoveSub.unsubscribe();
+              this.rotateStop.emit(this.point);
+            })
+          ))
+        ).subscribe((moveEvent: MouseEvent) => {
+          this.rect = this.el.nativeElement.getBoundingClientRect();
+          console.log('mouse move', moveEvent, this.rect);
+
+          this.point = this.createPoint(moveEvent);
+          // console.log(this.point);
+          this.applyRotation();
+        });
       });
-    });
   }
 
   public initialRender() {
@@ -124,6 +129,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
   }
 
   public rotationRender() {
+    console.log(this.rotation);
     this.renderer.setStyle(this.el.nativeElement, 'transform', `rotate(${this.rotation}deg)`);
   }
 
@@ -137,6 +143,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
     if (this.mouseUpSub) {
       this.mouseUpSub.unsubscribe();
     }
+    console.log('directive destroy');
   }
 
 
@@ -144,7 +151,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
   private applyRotation() {
     const quadrant = calculateQuadrant(this.point);
     const rotation = determineCSSRotationAngle(this.point, quadrant);
-    // console.log(rotation);
+    console.log(rotation);
     this.rotating.emit(rotation);
     this.rotation = rotation;
     requestAnimationFrame(this.rotationRender.bind(this));
@@ -164,7 +171,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
         y: this._normalizeY(mouseEvent.clientY)
       };
     }
-
+    console.log('point', point);
     return point;
   }
 
@@ -173,7 +180,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
   }
 
   private _normalizeY(coordY) {
-    return ((coordY - this.rect.top) * -1) + this.rect.width / 2;
+    return ((coordY - this.rect.top) * -1) + this.rect.height / 2;
   }
 
 }

@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 License: MIT
 
-<p align="center"><img width="250" src="./screenshots/thumbnail.png" alt="screenshot"></p>
+<p align="center"><img width="250" src="../../screenshots/thumbnail.png" alt="screenshot"></p>
 
 ## Introduction
 

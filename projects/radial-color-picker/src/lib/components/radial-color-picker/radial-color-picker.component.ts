@@ -176,7 +176,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   writeValue(obj: any): void {
-    console.log(obj);
+    // console.log(obj);
     this.value = obj;
   }
 
@@ -207,7 +207,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
+    // console.log(changes);
     if (changes.color && changes.color.currentValue) {
       this.value = changes.color.currentValue;
     }
@@ -309,7 +309,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   public confirmColor($event) {
-    console.log('confirm color', $event);
+    // console.log('confirm color', $event);
     if (!this.isCollapsible) {
       this.selected.emit($event.color);
       this.lifecycle.emit(RCPLifecycleEvents.selected);
@@ -369,7 +369,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
     if (this.gradientPlayer) {
       this.gradientPlayer.destroy();
     }
-    console.log('color picker destroy');
+    // console.log('color picker destroy');
   }
 }
 

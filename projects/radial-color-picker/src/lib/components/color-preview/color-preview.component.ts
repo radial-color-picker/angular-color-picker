@@ -95,6 +95,6 @@ export class ColorPreviewComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   ngOnDestroy() {
-    console.log('color preview destroy');
+    // console.log('color preview destroy');
   }
 }

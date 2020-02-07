@@ -96,7 +96,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
       .subscribe((downEvent) => {
         this.dragging = true;
         this.rect = this.el.nativeElement.getBoundingClientRect();
-        console.log('mouse down', downEvent, this.rect);
+        // console.log('mouse down', downEvent, this.rect);
         this.point = this.createPoint(downEvent);
         this.rotateStart.emit(this.point);
         this.applyRotation();
@@ -106,7 +106,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
           takeUntil(merge(this.mouseOut$, this.mouseUp$).pipe(
             tap((upEvent) => {
               this.rect = this.el.nativeElement.getBoundingClientRect();
-              console.log('mouse up', upEvent, this.rect);
+              // console.log('mouse up', upEvent, this.rect);
               this.dragging = false;
               this.mouseMoveSub.unsubscribe();
               this.rotateStop.emit(this.point);
@@ -114,7 +114,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
           ))
         ).subscribe((moveEvent: MouseEvent) => {
           this.rect = this.el.nativeElement.getBoundingClientRect();
-          console.log('mouse move', moveEvent, this.rect);
+          // console.log('mouse move', moveEvent, this.rect);
 
           this.point = this.createPoint(moveEvent);
           // console.log(this.point);
@@ -129,7 +129,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
   }
 
   public rotationRender() {
-    console.log(this.rotation);
+    // console.log(this.rotation);
     this.renderer.setStyle(this.el.nativeElement, 'transform', `rotate(${this.rotation}deg)`);
   }
 
@@ -143,7 +143,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
     if (this.mouseUpSub) {
       this.mouseUpSub.unsubscribe();
     }
-    console.log('directive destroy');
+    // console.log('directive destroy');
   }
 
 
@@ -151,7 +151,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
   private applyRotation() {
     const quadrant = calculateQuadrant(this.point);
     const rotation = determineCSSRotationAngle(this.point, quadrant);
-    console.log(rotation);
+    // console.log(rotation);
     this.rotating.emit(rotation);
     this.rotation = rotation;
     requestAnimationFrame(this.rotationRender.bind(this));
@@ -171,7 +171,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
         y: this._normalizeY(mouseEvent.clientY)
       };
     }
-    console.log('point', point);
+    // console.log('point', point);
     return point;
   }
 

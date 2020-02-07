@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_lib": "ng build --prod radial-color-picker",
+    "build_lib": "ng build radial-color-picker --prod",
     "npm_pack": "cd dist/radial-color-picker && npm pack",
     "package": "npm run build_lib && npm run npm_pack"
   },

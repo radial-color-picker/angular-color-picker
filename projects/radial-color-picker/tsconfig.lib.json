@@ -9,12 +9,18 @@
     "lib": [
       "dom",
       "es2018"
-    ]
+    ],
+    "paths": {
+      "@angular/*": [
+        "../../node_modules/@angular/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
-    "enableResourceInlining": true
+    "enableResourceInlining": true,
+    "enableIvy": false
   },
   "exclude": [
     "src/test.ts",

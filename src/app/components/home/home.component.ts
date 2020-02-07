@@ -12,5 +12,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  public rtpHook($event) {
+    console.log(`radial color picker lifecycle event: ${$event}`);
+  }
 }

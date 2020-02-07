@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnChanges, OnInit, Output, OnDestroy } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Animations } from '../../helpers/animations';
 
@@ -12,7 +12,7 @@ import { Animations } from '../../helpers/animations';
     Animations.buttonAnimation
   ]
 })
-export class ColorPreviewComponent implements OnInit, OnChanges, AfterViewInit {
+export class ColorPreviewComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   public background: SafeStyle;
 
   public rippleState: any;
@@ -27,11 +27,11 @@ export class ColorPreviewComponent implements OnInit, OnChanges, AfterViewInit {
   @Output() confirm = new EventEmitter<any>();
 
   @HostBinding('style.width') get width() {
-    return (this.size && this.size < 200 ) ? '36px' : '70px';
+    return (this.size && this.size < 200) ? '36px' : '70px';
   }
 
   @HostBinding('style.height') get height() {
-    return (this.size && this.size < 200 ) ? '36px' : '70px';
+    return (this.size && this.size < 200) ? '36px' : '70px';
   }
 
   @HostListener('click') onClick() {
@@ -52,9 +52,10 @@ export class ColorPreviewComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   constructor(
-    private _sanitizer: DomSanitizer,
+    private sanitizer: DomSanitizer,
     private el: ElementRef
   ) {
+
 
   }
 
@@ -72,7 +73,7 @@ export class ColorPreviewComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngOnChanges(changes) {
     if (changes.color && changes.color.currentValue) {
-      this.background = this._sanitizer.bypassSecurityTrustStyle(this.color);
+      this.background = this.sanitizer.bypassSecurityTrustStyle(this.color);
     }
   }
 
@@ -91,5 +92,9 @@ export class ColorPreviewComponent implements OnInit, OnChanges, AfterViewInit {
     if ($event.toState) {
       this.buttonState = false;
     }
+  }
+
+  ngOnDestroy() {
+    console.log('color preview destroy');
   }
 }

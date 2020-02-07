@@ -37,7 +37,7 @@ export const rgbToHex = (r: number, g: number, b: number): string => {
  * @return The HSL representation containing the hue (in degrees),
  *                     saturation (in percentage) and luminosity (in percentage) fields.
  */
-export const rgbToHsl = (r: number, g: number, b: number): {hue: number, saturation: number, luminosity: number} => {
+export const rgbToHsl = (r: number, g: number, b: number): { hue: number, saturation: number, luminosity: number } => {
   r = r / 255;
   g = g / 255;
   b = b / 255;

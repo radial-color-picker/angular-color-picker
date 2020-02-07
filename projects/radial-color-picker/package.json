@@ -2,11 +2,11 @@
   "name": "radial-color-picker",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^6.0.3",
-    "@angular/animations": "^6.0.3",
-    "@angular/core": "^6.0.3",
-    "@angular/cdk": "^6.2.0",
-    "@angular/forms": "^6.0.3",
-    "rxjs": "^6.0.0"
+    "@angular/cdk": "^9.0.0",
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/animations": "^9.0.0",
+    "@angular/platform-browser": "^9.0.0",
+    "tslib": "^1.10.0"
   }
 }

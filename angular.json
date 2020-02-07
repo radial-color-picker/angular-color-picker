@@ -124,7 +124,9 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {
+            "baseHref": "https://radial-color-picker.github.io/angular-color-picker/"
+          }
         }
       }
     },

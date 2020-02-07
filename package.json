@@ -1,6 +1,6 @@
 {
   "name": "angular-color-picker",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,7 +12,7 @@
     "npm_pack": "cd dist/radial-color-picker && npm pack",
     "package": "npm run build_lib && npm run npm_pack"
   },
-  "private": false,
+  "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.0",
     "@angular/cdk": "^9.0.0",

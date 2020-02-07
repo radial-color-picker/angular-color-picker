@@ -1,6 +1,26 @@
 {
-  "name": "radial-color-picker",
+  "name": "@radial-color-picker/angular-color-picker",
   "version": "0.0.1",
+  "description": "Radial Color Picker - Angular",
+  "author": "Zlati Pehlivanov (zlati.pehlivanov@gmail.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/radial-color-picker/angular-color-picker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/radial-color-picker/angular-color-picker/issues"
+  },
+  "private": false,
+  "homepage": "https://github.com/radial-color-picker/angular-color-picker",
+  "keywords": [
+    "angular",
+    "radial color picker",
+    "color picker",
+    "color-picker",
+    "angular-color-picker",
+    "hue picker"
+  ],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/cdk": "^9.0.0",
     "@angular/common": "^9.0.0",

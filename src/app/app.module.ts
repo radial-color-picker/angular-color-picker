@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { RadialColorPickerModule } from 'radial-color-picker';
 import { HomeComponent } from './components/home/home.component';
 import { SimpleComponent } from './components/simple/simple.component';
 import { NgmodelComponent } from './components/ngmodel/ngmodel.component';
@@ -22,6 +21,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { RadialColorPickerModule } from "./components/lib/radial-color-picker.module";
 
 @NgModule({
   declarations: [
@@ -48,7 +48,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatMenuModule,
     MatDividerModule,
     MatButtonModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    RadialColorPickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+
+$white: #ffffff;
+$black: #000000;
+$button-stable-border: #b2b2b2  !default;

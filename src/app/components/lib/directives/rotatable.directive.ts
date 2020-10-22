@@ -124,7 +124,7 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
   }
 
   public initialRender() {
-    const angle = this.angle + 90;
+    const angle = this.angle - 90;
     this.renderer.setStyle(this.el.nativeElement, 'transform', `rotate(${angle}deg)`);
   }
 

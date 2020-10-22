@@ -16,6 +16,7 @@ import {
 import { fromEvent, Observable, Subscription, merge } from 'rxjs';
 import { filter, takeUntil, tap } from 'rxjs/operators';
 import { calculateQuadrant, determineCSSRotationAngle } from '../helpers/helpers';
+import {Quadrant} from "../helpers/constants";
 
 @Directive({
   selector: '[rcpRotatable]'
@@ -151,6 +152,9 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
   private applyRotation() {
     const quadrant = calculateQuadrant(this.point);
     const rotation = determineCSSRotationAngle(this.point, quadrant);
+    if(quadrant === Quadrant.I || quadrant === Quadrant.IV) {
+      return
+    }
     // console.log(rotation);
     this.rotating.emit(rotation);
     this.rotation = rotation;

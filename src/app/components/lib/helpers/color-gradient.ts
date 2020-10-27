@@ -31,7 +31,7 @@ export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, coef
   // Replaces circle with white
   ctx.fillStyle = 'rgb(255, 255, 255)';
   ctx.beginPath();
-  ctx.arc(radius, radius, radius * coefficient, 0, Math.PI * 2, true);
+  ctx.arc(radius, radius, radius * coefficient, 90 * toRad, 270 * toRad, false);
   ctx.closePath();
   ctx.fill();
 
@@ -39,7 +39,7 @@ export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, coef
   ctx.strokeStyle = 'rgb(255, 255, 255)';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.arc(radius, radius, radius, 0, 2 * Math.PI);
+  ctx.arc(radius, radius, radius, 90*toRad, 270 * toRad);
   ctx.stroke();
 
 

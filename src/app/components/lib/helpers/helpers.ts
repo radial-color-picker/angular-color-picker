@@ -43,30 +43,46 @@ export const distanceOfSegmentByXYValues = (x1: number, y1: number, x2: number, 
  *
  * @param point x,y coordinates of client's pointer position
  * @param quadrant one of four quarters of the coordinate plane
+ * @param isSemiCircle means that the rotation should be adjusted from 360 to 180 degrees
  */
-export const determineCSSRotationAngle = (point, quadrant) => {
+export const determineCSSRotationAngle = (point, isSemiCircle) => {
   let cx = point.x;
   let cy = point.y;
-  let add = 0;
+  let addQuadrant = 0;
+  let addQuadrantColor = 0;
+  const quadrant = calculateQuadrant(point)
   switch (quadrant) {
     case Quadrant.II:
-      add = 270;
+      addQuadrant = 270;
       cx = ((point.x * Cache.cos90) - (point.y * Cache.sin90));
       cy = ((point.x * Cache.sin90) + (point.y * Cache.cos90));
+      addQuadrantColor = 180
       break;
     case Quadrant.III:
-      add = 180;
+      addQuadrant = 180;
       cx = ((point.x * Cache.cos180) - (point.y * Cache.sin180));
       cy = ((point.x * Cache.sin180) + (point.y * Cache.cos180));
       break;
     case Quadrant.IV:
-      add = 90;
+      addQuadrant = 90;
       cx = ((point.x * Cache.cos270) - (point.y * Cache.sin270));
       cy = ((point.x * Cache.sin270) + (point.y * Cache.cos270));
       break;
   }
 
-  const rotation = Math.atan((distanceOfSegmentByXYValues(0, cy, cx, cy)) / (distanceOfSegmentByXYValues(0, cy, 0, 0)));
+  const toDegrees = 180 / Math.PI;
 
-  return (rotation * (180 / Math.PI)) + add;
+  const adjacent = distanceOfSegmentByXYValues(0, cy, 0, 0)
+  const opposite = distanceOfSegmentByXYValues(0, cy, cx, cy)
+  const rotation = Math.atan(opposite / adjacent) * toDegrees;
+
+  return {
+    rotation: rotation + addQuadrant,
+    colorAngle: rotation * 2 + addQuadrantColor
+  }
 };
+
+export const validPositionForSemicircle = (point) => {
+  const quadrant = calculateQuadrant(point)
+  return quadrant === Quadrant.II || quadrant === Quadrant.III
+}

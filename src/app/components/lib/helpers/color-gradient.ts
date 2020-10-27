@@ -11,16 +11,17 @@ export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, coef
   const toRad = (2 * Math.PI) / 360;
   const step = 0.5;
   const aliasing = 1;
+  const lineWidth = 2;
 
-  const INITIAL_ANGLE = 90
-  const FINAL_ANGLE = 270
+  const INITIAL_ANGLE = 90;
+  const FINAL_ANGLE = 270;
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, diameter, diameter);
-  for (let i = INITIAL_ANGLE; i < FINAL_ANGLE; i+=step) {
-    const startAngle = (i - aliasing) * toRad;
+  for (let i = INITIAL_ANGLE; i <= FINAL_ANGLE; i+=step) {
+    const startAngle = i > INITIAL_ANGLE ? (i - aliasing) * toRad : i * toRad;
     const endAngle = (i + step) * toRad;
     ctx.beginPath();
-    ctx.arc(radius, radius, radius / 2, startAngle, endAngle, false);
+    ctx.arc(radius, radius, radius, startAngle, endAngle, false);
     ctx.strokeStyle = 'hsl(' + (i-INITIAL_ANGLE)*2+ ', 100%, 50%)';
     ctx.lineWidth = radius;
     ctx.closePath();
@@ -31,16 +32,16 @@ export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, coef
   // Replaces circle with white
   ctx.fillStyle = 'rgb(255, 255, 255)';
   ctx.beginPath();
-  ctx.arc(radius, radius, radius * coefficient, 90 * toRad, 270 * toRad, false);
+  ctx.arc(radius + lineWidth, radius, radius * coefficient, 90 * toRad, 270 * toRad, false);
   ctx.closePath();
   ctx.fill();
 
   // Removes outline circle
-  ctx.strokeStyle = 'rgb(255, 255, 255)';
-  ctx.lineWidth = 2;
+/*  ctx.strokeStyle = 'rgb(255, 255, 255)';
+  ctx.lineWidth = lineWidth;
   ctx.beginPath();
-  ctx.arc(radius, radius, radius, 90*toRad, 270 * toRad);
-  ctx.stroke();
+  ctx.arc(radius, radius, 50, 270*toRad, 90 * toRad);
+  ctx.stroke();*/
 
 
   return canvas;

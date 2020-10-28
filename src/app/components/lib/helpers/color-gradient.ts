@@ -13,16 +13,23 @@ export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, coef
   const aliasing = 1;
   const lineWidth = 2;
 
-  const INITIAL_ANGLE = 90;
-  const FINAL_ANGLE = 270;
+  const INITIAL_ANGLE = 0;
+  const FINAL_ANGLE = 360;
+  const ANGLE_OFFSET = 90;
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, diameter, diameter);
   for (let i = INITIAL_ANGLE; i <= FINAL_ANGLE; i += step) {
-    const startAngle = i > INITIAL_ANGLE ? (i - aliasing) * toRad : i * toRad;
-    const endAngle = (i + step) * toRad;
+    const startAngle = i > INITIAL_ANGLE ? (i - aliasing + ANGLE_OFFSET) * toRad : (i + ANGLE_OFFSET) * toRad;
+    const endAngle = (i + step + ANGLE_OFFSET) * toRad;
     ctx.beginPath();
     ctx.arc(radius, radius, radius, startAngle, endAngle, false);
-    ctx.strokeStyle = 'hsl(' + (i - INITIAL_ANGLE) * 2 + ', 100%, 50%)';
+    if (i >= 180) {
+      const lightnessValue = Math.abs((i * 100 / 180) - 200);
+      ctx.strokeStyle = `hsl(0, 100%, ${lightnessValue}%)`;
+    } else {
+      ctx.strokeStyle = 'hsl(' + i * 2 + ', 100%, 50%)';
+    }
+
     ctx.lineWidth = radius;
     ctx.closePath();
     ctx.stroke();
@@ -32,7 +39,7 @@ export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, coef
   // Replaces circle with white
   ctx.fillStyle = 'rgb(255, 255, 255)';
   ctx.beginPath();
-  ctx.arc(radius + lineWidth, radius, radius * coefficient, 90 * toRad, 270 * toRad, false);
+  ctx.arc(radius + lineWidth, radius, radius * coefficient, INITIAL_ANGLE * toRad, FINAL_ANGLE * toRad, false);
   ctx.closePath();
   ctx.fill();
 
@@ -59,12 +66,15 @@ export const renderOpacityValuesMap = (canvas: HTMLCanvasElement, diameter: numb
   const FINAL_ANGLE = 90;
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, diameter, diameter);
+  const opacityCoefficientVelocity = 100 / FINAL_ANGLE;
+  const distanceToColorCircle = 16;
   for (let i = INITIAL_ANGLE; i <= FINAL_ANGLE; i += step) {
     const startAngle = i > INITIAL_ANGLE ? (i - aliasing) * toRad : i * toRad;
     const endAngle = (i + step) * toRad;
+    const lightnessValue = (i * opacityCoefficientVelocity);
     ctx.beginPath();
-    ctx.arc(radius, radius, radius, startAngle, endAngle, false);
-    ctx.strokeStyle = `hsl(0, 100%, ${i}%)`;
+    ctx.arc(radius + distanceToColorCircle, radius, radius + Math.sqrt(distanceToColorCircle), startAngle, endAngle, false);
+    ctx.strokeStyle = `hsl(0, 100%, ${lightnessValue}%)`;
     ctx.lineWidth = radius;
     ctx.closePath();
     ctx.stroke();

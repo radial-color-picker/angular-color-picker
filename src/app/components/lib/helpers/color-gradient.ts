@@ -17,12 +17,12 @@ export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, coef
   const FINAL_ANGLE = 270;
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, diameter, diameter);
-  for (let i = INITIAL_ANGLE; i <= FINAL_ANGLE; i+=step) {
+  for (let i = INITIAL_ANGLE; i <= FINAL_ANGLE; i += step) {
     const startAngle = i > INITIAL_ANGLE ? (i - aliasing) * toRad : i * toRad;
     const endAngle = (i + step) * toRad;
     ctx.beginPath();
     ctx.arc(radius, radius, radius, startAngle, endAngle, false);
-    ctx.strokeStyle = 'hsl(' + (i-INITIAL_ANGLE)*2+ ', 100%, 50%)';
+    ctx.strokeStyle = 'hsl(' + (i - INITIAL_ANGLE) * 2 + ', 100%, 50%)';
     ctx.lineWidth = radius;
     ctx.closePath();
     ctx.stroke();

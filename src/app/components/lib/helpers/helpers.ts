@@ -50,13 +50,13 @@ export const determineCSSRotationAngle = (point, isSemiCircle) => {
   let cy = point.y;
   let addQuadrant = 0;
   let addQuadrantColor = 0;
-  const quadrant = calculateQuadrant(point)
+  const quadrant = calculateQuadrant(point);
   switch (quadrant) {
     case Quadrant.II:
       addQuadrant = 270;
       cx = ((point.x * Cache.cos90) - (point.y * Cache.sin90));
       cy = ((point.x * Cache.sin90) + (point.y * Cache.cos90));
-      addQuadrantColor = 180
+      addQuadrantColor = 180;
       break;
     case Quadrant.III:
       addQuadrant = 180;
@@ -72,17 +72,17 @@ export const determineCSSRotationAngle = (point, isSemiCircle) => {
 
   const toDegrees = 180 / Math.PI;
 
-  const adjacent = distanceOfSegmentByXYValues(0, cy, 0, 0)
-  const opposite = distanceOfSegmentByXYValues(0, cy, cx, cy)
+  const adjacent = distanceOfSegmentByXYValues(0, cy, 0, 0);
+  const opposite = distanceOfSegmentByXYValues(0, cy, cx, cy);
   const rotation = Math.atan(opposite / adjacent) * toDegrees;
 
   return {
     rotation: rotation + addQuadrant,
     colorAngle: rotation * 2 + addQuadrantColor
-  }
+  };
 };
 
 export const validPositionForSemicircle = (point) => {
-  const quadrant = calculateQuadrant(point)
-  return quadrant === Quadrant.II || quadrant === Quadrant.III
-}
+  const quadrant = calculateQuadrant(point);
+  return quadrant === Quadrant.II || quadrant === Quadrant.III;
+};

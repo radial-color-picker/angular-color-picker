@@ -3,5 +3,5 @@
   <div class="rotator" #rotator rcpRotatable [disable]="disabled" [semicircle]="true" [angle]="hueValue" (rotating)="onRotate($event)" [active]="active">
     <div class="knob" #knob></div>
   </div>
-  <rcp-color-preview [color]="value" [size]="size" [coefficient]="coefficient" (confirm)="confirmColor($event)"></rcp-color-preview>
+  <app-rcp-color-preview [color]="value" [size]="size" [coefficient]="coefficient" (confirm)="confirmColor($event)"></app-rcp-color-preview>
 </div>

@@ -40,7 +40,7 @@ enum RCPLifecycleEvents {
 }
 
 @Component({
-  selector: 'rcp-radial-color-picker',
+  selector: 'app--radial-color-picker',
   templateUrl: './radial-color-picker.component.html',
   styleUrls: ['./radial-color-picker.component.scss'],
   providers: [RADIAL_COLOR_PICKER_VALUE_ACCESSOR],
@@ -131,10 +131,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   get value() {
-    let color = this._value;
-
-    color = '#' + this._value;
-    return color;
+    return '#' + this._value;
   }
 
   @ViewChild('canvas', { static: false, read: ElementRef }) public canvas: ElementRef;
@@ -154,7 +151,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
 
   notifyValueChange() {
     if (this.onChange) {
-      let color = this.value;
+      let color;
       const rgb = hexToRgb(this._value);
       const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
       switch (this.colorType) {
@@ -207,7 +204,7 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("changes", changes)
+    console.log('changes', changes);
     // console.log(changes);
     if (changes.color && changes.color.currentValue) {
       this.value = changes.color.currentValue;

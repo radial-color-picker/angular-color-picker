@@ -4,7 +4,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Animations } from '../../helpers/animations';
 
 @Component({
-  selector: 'rcp-color-preview',
+  selector: 'app-rcp-color-preview',
   templateUrl: './color-preview.component.html',
   styleUrls: ['./color-preview.component.scss'],
   animations: [

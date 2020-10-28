@@ -71,13 +71,13 @@ export class AppModule { }
 
 and in your component template
 ```html
-<rcp-radial-color-picker></rcp-radial-color-picker>
+<app-rcp-radial-color-picker></app-rcp-radial-color-picker>
 ```
 
 more examples can be found in the app in this repository
 
 ## <a name="inputs">Inputs</a>
-`<rcp-radial-color-picker>` component has several inputs, all of which are optional.
+`<app-rcp-radial-color-picker>` component has several inputs, all of which are optional.
 
 | Options       | Type   | Default/Description |
 |------------|--------|---------|
@@ -94,7 +94,7 @@ more examples can be found in the app in this repository
 
 
 ## <a name="outputs">Outputs</a>
-`<rcp-radial-color-picker>` component has several outputs, all of which are optional.
+`<app-rcp-radial-color-picker>` component has several outputs, all of which are optional.
 
 | Options       | Type   | Default/Description |
 |------------|--------|---------|

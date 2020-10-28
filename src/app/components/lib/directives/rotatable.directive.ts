@@ -18,7 +18,7 @@ import { filter, takeUntil, tap } from 'rxjs/operators';
 import { determineCSSRotationAngle, validPositionForSemicircle } from '../helpers/helpers';
 
 @Directive({
-  selector: '[rcpRotatable]'
+  selector: '[appRcpRotatable]'
 })
 export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterViewInit {
   public rotation: any;
@@ -151,8 +151,8 @@ export class RotatableDirective implements OnInit, OnChanges, OnDestroy, AfterVi
 
   private applyRotation() {
     const { rotation, colorAngle } = determineCSSRotationAngle(this.point, this.semicircle);
-    if(this.semicircle && !validPositionForSemicircle(this.point)) {
-      return
+    if (this.semicircle && !validPositionForSemicircle(this.point)) {
+      return;
     }
     this.rotating.emit(colorAngle);
     this.rotation = rotation;

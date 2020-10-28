@@ -40,14 +40,12 @@ enum RCPLifecycleEvents {
 }
 
 @Component({
-  selector: 'app--radial-color-picker',
+  selector: 'app-radial-color-picker',
   templateUrl: './radial-color-picker.component.html',
   styleUrls: ['./radial-color-picker.component.scss'],
   providers: [RADIAL_COLOR_PICKER_VALUE_ACCESSOR],
 })
 export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy, ControlValueAccessor {
-  protected _uid = `rcp-${nextUniqueId++}`;
-
   public coefficient = 0.77;
   public hueValue = 266;
   public disabled = false;

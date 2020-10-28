@@ -17,11 +17,11 @@ import { RotatableDirective } from './directives/rotatable.directive';
   declarations: [
     RotatableDirective,
     ColorPreviewComponent,
-    RadialColorPickerComponent
+    RadialColorPickerComponent,
   ],
   exports: [
     RotatableDirective,
-    RadialColorPickerComponent
+    RadialColorPickerComponent,
   ]
 })
 export class RadialColorPickerModule { }

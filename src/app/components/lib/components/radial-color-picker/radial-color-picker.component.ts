@@ -28,9 +28,7 @@ export const RADIAL_COLOR_PICKER_VALUE_ACCESSOR: any = {
   multi: true
 };
 
-let nextUniqueId = 0;
-const rgbRegex = /rgb\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
-const hslRegex = /hsl\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)$/;
+
 enum RCPLifecycleEvents {
   show = 'show',
   shown = 'shown',
@@ -202,7 +200,6 @@ export class RadialColorPickerComponent implements OnInit, AfterViewInit, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes', changes);
     // console.log(changes);
     if (changes.color && changes.color.currentValue) {
       this.value = changes.color.currentValue;

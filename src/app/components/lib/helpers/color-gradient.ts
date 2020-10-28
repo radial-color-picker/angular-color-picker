@@ -2,10 +2,11 @@
  *
  * @param canvas Canvas to paint the color wheel
  * @param diameter Color wheel diameter in pixels
+ * @param currentColorDegree deegre value of the current selected color, defaults to 180
  * @param coefficient Relation between inner white circle outer border and color circle outer border, controls the width of the color gradient path
  * @returns canvas The passed canvas for easier chaining
  */
-export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, coefficient: number = 0.77): HTMLCanvasElement => {
+export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, currentColorDegree: number = 180, coefficient: number = 0.77): HTMLCanvasElement => {
   canvas.width = canvas.height = diameter;
   const radius = diameter / 2;
   const toRad = (2 * Math.PI) / 360;
@@ -25,7 +26,7 @@ export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, coef
     ctx.arc(radius, radius, radius, startAngle, endAngle, false);
     if (i >= 180) {
       const lightnessValue = Math.abs((i * 100 / 180) - 200);
-      ctx.strokeStyle = `hsl(0, 100%, ${lightnessValue}%)`;
+      ctx.strokeStyle = `hsl(${currentColorDegree}, 100%, ${lightnessValue}%)`;
     } else {
       ctx.strokeStyle = 'hsl(' + i * 2 + ', 100%, 50%)';
     }

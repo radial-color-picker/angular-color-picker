@@ -42,16 +42,17 @@ export const distanceOfSegmentByXYValues = (x1: number, y1: number, x2: number, 
  * Calculates the angle of rotation
  *
  * @param point x,y coordinates of client's pointer position
- * @param quadrant one of four quarters of the coordinate plane
- * @param isSemiCircle means that the rotation should be adjusted from 360 to 180 degrees
  */
-export const determineCSSRotationAngle = (point, isSemiCircle) => {
+export const determineCSSRotationAngle = (point) => {
   let cx = point.x;
   let cy = point.y;
   let addQuadrant = 0;
   let addQuadrantColor = 0;
   const quadrant = calculateQuadrant(point);
   switch (quadrant) {
+    case Quadrant.I:
+      addQuadrant = 180;
+      break;
     case Quadrant.II:
       addQuadrant = 270;
       cx = ((point.x * Cache.cos90) - (point.y * Cache.sin90));
@@ -64,7 +65,7 @@ export const determineCSSRotationAngle = (point, isSemiCircle) => {
       cy = ((point.x * Cache.sin180) + (point.y * Cache.cos180));
       break;
     case Quadrant.IV:
-      addQuadrant = 90;
+      addQuadrant = 270;
       cx = ((point.x * Cache.cos270) - (point.y * Cache.sin270));
       cy = ((point.x * Cache.sin270) + (point.y * Cache.cos270));
       break;
@@ -82,7 +83,36 @@ export const determineCSSRotationAngle = (point, isSemiCircle) => {
   };
 };
 
-export const validPositionForSemicircle = (point) => {
+/**
+ * Quadrant I and IV => opacity knob (right semicircle)
+ * Quadrant II and III => color knob (left semicircle)
+ * @param point
+ */
+export const isRightSemicircleSelected = (point) => {
   const quadrant = calculateQuadrant(point);
-  return quadrant === Quadrant.II || quadrant === Quadrant.III;
+  return quadrant === Quadrant.I || quadrant === Quadrant.IV
 };
+
+const _normalizeX = (coordX, elementRect) => {
+  return coordX - elementRect.left - elementRect.width / 2;
+}
+
+const _normalizeY = (coordY, elementRect) => {
+  return ((coordY - elementRect.top) * -1) + elementRect.height / 2;
+}
+
+export const createPoint = (mouseEvent, elementRect): {x: number, y: number} => {
+  let point;
+  if (mouseEvent.targetTouches) {
+    point = {
+      x: _normalizeX(mouseEvent.targetTouches[0].clientX, elementRect),
+      y: _normalizeY(mouseEvent.targetTouches[0].clientY, elementRect)
+    };
+  } else {
+    point = {
+      x: _normalizeX(mouseEvent.clientX, elementRect),
+      y: _normalizeY(mouseEvent.clientY, elementRect)
+    };
+  }
+  return point;
+}

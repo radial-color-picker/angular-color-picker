@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ColorPreviewComponent } from './components/color-preview/color-preview.component';
 import { RadialColorPickerComponent } from './components/radial-color-picker/radial-color-picker.component';
-import { RotatableDirective } from './directives/rotatable.directive';
 
 @NgModule({
   imports: [
@@ -15,12 +14,10 @@ import { RotatableDirective } from './directives/rotatable.directive';
     BrowserAnimationsModule
   ],
   declarations: [
-    RotatableDirective,
     ColorPreviewComponent,
     RadialColorPickerComponent,
   ],
   exports: [
-    RotatableDirective,
     RadialColorPickerComponent,
   ]
 })

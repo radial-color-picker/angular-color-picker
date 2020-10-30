@@ -6,7 +6,7 @@
  * @param coefficient Relation between inner white circle outer border and color circle outer border, controls the width of the color gradient path
  * @returns canvas The passed canvas for easier chaining
  */
-export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, currentColorDegree: number = 180, coefficient: number = 0.77): HTMLCanvasElement => {
+export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, currentColorDegree: number = 0, coefficient: number = 0.77): HTMLCanvasElement => {
   canvas.width = canvas.height = diameter;
   const radius = diameter / 2;
   const toRad = (2 * Math.PI) / 360;
@@ -51,42 +51,6 @@ export const renderColorMap = (canvas: HTMLCanvasElement, diameter: number, curr
   ctx.arc(radius, radius, 50, 270*toRad, 90 * toRad);
   ctx.stroke();*/
 
-
-  return canvas;
-};
-
-export const renderOpacityValuesMap = (canvas: HTMLCanvasElement, diameter: number, coefficient: number = 0.77): HTMLCanvasElement => {
-  canvas.width = canvas.height = diameter;
-  const radius = diameter / 2;
-  const toRad = (2 * Math.PI) / 360;
-  const step = 0.5;
-  const aliasing = 1;
-  const lineWidth = 2;
-
-  const INITIAL_ANGLE = -90;
-  const FINAL_ANGLE = 90;
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, diameter, diameter);
-  const opacityCoefficientVelocity = 100 / FINAL_ANGLE;
-  const distanceToColorCircle = 16;
-  for (let i = INITIAL_ANGLE; i <= FINAL_ANGLE; i += step) {
-    const startAngle = i > INITIAL_ANGLE ? (i - aliasing) * toRad : i * toRad;
-    const endAngle = (i + step) * toRad;
-    const lightnessValue = (i * opacityCoefficientVelocity);
-    ctx.beginPath();
-    ctx.arc(radius + distanceToColorCircle, radius, radius + Math.sqrt(distanceToColorCircle), startAngle, endAngle, false);
-    ctx.strokeStyle = `hsl(0, 100%, ${lightnessValue}%)`;
-    ctx.lineWidth = radius;
-    ctx.closePath();
-    ctx.stroke();
-  }
-
-  // Replaces circle with white
-  ctx.fillStyle = 'rgb(255, 255, 255)';
-  ctx.beginPath();
-  ctx.arc(radius + lineWidth, radius, radius * coefficient, INITIAL_ANGLE * toRad, FINAL_ANGLE * toRad, false);
-  ctx.closePath();
-  ctx.fill();
 
   return canvas;
 };

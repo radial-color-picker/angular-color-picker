@@ -1,10 +1,9 @@
 <div class="wrapper">
   <canvas #canvas ></canvas>
-  <div class="rotator" #rotator appRcpRotatable [disable]="disabled" [semicircle]="true" [angle]="hueValue" (rotating)="onRotate($event)" [active]="active">
+  <div class="rotator" #colorRotator id="colorRotator">
     <div class="knob" #knob></div>
   </div>
-  <canvas #opacityCanvas ></canvas>
-  <div class="opacityRotator2" #opacityRotator appRcpRotatable [disable]="disabled" [semicircle]="true" [angle]="hueValue" (rotating)="onRotate($event)" [active]="active">
+  <div class="rotator" #opacityRotator id="opacityRotator">
     <div class="opacityKnob" #opacityKnob></div>
   </div>
   <app-rcp-color-preview [color]="value" [size]="size" [coefficient]="coefficient" (confirm)="confirmColor($event)"></app-rcp-color-preview>
